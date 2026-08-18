@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tacocloud-ui</artifactId>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>sia</groupId>
+  	<artifactId>taco-cloud-parent</artifactId>
+  	<version>0.0.8-SNAPSHOT</version>
+	</parent>
+
+	<name>tacocloud-ui</name>
+	<description>Taco Cloud UI</description>
+
+  <properties>
+      <node.version>v18.20.4</node.version>
+      <yarn.version>v0.24.6</yarn.version>
+      <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
+      <environment>dev</environment>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>dist</directory>
+              <includes>
+                <include>*</include>
+              </includes>
+            </fileset>
+            <fileset>
+              <directory>node</directory>
+              <includes>
+                <include>**</include>
+              </includes>
+            </fileset>
+            <fileset>
+              <directory>node_modules</directory>
+              <includes>
+                <include>**</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

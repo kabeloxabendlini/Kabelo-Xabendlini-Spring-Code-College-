@@ -1,0 +1,24 @@
+# IntelliJ IDEA
+.idea/
+
+# VS Code
+.vscode/
+
+# Java / Maven
+**/target/
+**/*.class
+
+# Node
+**/node_modules/
+
+# Build output
+**/dist/
+**/build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+Spring_in_Action_Sixth_Edition.pdf
