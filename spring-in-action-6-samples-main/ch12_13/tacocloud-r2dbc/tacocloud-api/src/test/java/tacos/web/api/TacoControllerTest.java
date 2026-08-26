@@ -3,10 +3,6 @@ package tacos.web.api;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -17,9 +13,9 @@ import reactor.core.publisher.Mono;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Taco;
+import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
 
-@Disabled("TODO: For now...")
 public class TacoControllerTest {
 
   @Test
@@ -38,8 +34,12 @@ public class TacoControllerTest {
     TacoRepository tacoRepo = Mockito.mock(TacoRepository.class);
     when(tacoRepo.findAll()).thenReturn(tacoFlux);
 
+    IngredientRepository ingredientRepo = Mockito.mock(IngredientRepository.class);
+    when(ingredientRepo.findById(any(Long.class)))
+        .thenReturn(Mono.just(new Ingredient("INGA", "Ingredient A", Type.WRAP)));
+
     WebTestClient testClient = WebTestClient.bindToController(
-        new TacoController(tacoRepo, null))
+        new TacoController(tacoRepo, ingredientRepo))
         .build();
 
     testClient.get().uri("/api/tacos?recent")
@@ -67,8 +67,12 @@ public class TacoControllerTest {
 
     when(tacoRepo.save(any())).thenReturn(savedTacoMono);
 
+    IngredientRepository ingredientRepo = Mockito.mock(IngredientRepository.class);
+    when(ingredientRepo.findById(any(Long.class)))
+        .thenReturn(Mono.just(new Ingredient("INGA", "Ingredient A", Type.WRAP)));
+
     WebTestClient testClient = WebTestClient.bindToController(
-        new TacoController(tacoRepo, null)).build();
+        new TacoController(tacoRepo, ingredientRepo)).build();
 
     testClient.post()
         .uri("/api/tacos")
@@ -80,17 +84,19 @@ public class TacoControllerTest {
         .isEqualTo(savedTaco);
   }
 
-  private Taco testTaco(Long number) {
+    private Taco testTaco(Long number) {
     Taco taco = new Taco();
     taco.setId(number);
     taco.setName("Taco " + number);
-    Set<Ingredient> ingredients = new HashSet<>();
-    ingredients.add(
-        new Ingredient("INGA", "Ingredient A", Type.WRAP));
-    ingredients.add(
-        new Ingredient("INGB", "Ingredient B", Type.PROTEIN));
-    taco.addIngredient(new Ingredient("INGA", "Ingredient A", Type.WRAP));
-    taco.addIngredient(new Ingredient("INGB", "Ingredient B", Type.PROTEIN));
+
+    Ingredient ingredientA = new Ingredient("INGA", "Ingredient A", Type.WRAP);
+    ingredientA.setId(1L);
+    taco.addIngredient(ingredientA);
+
+    Ingredient ingredientB = new Ingredient("INGB", "Ingredient B", Type.PROTEIN);
+    ingredientB.setId(2L);
+    taco.addIngredient(ingredientB);
+
     return taco;
   }
 }

@@ -11,11 +11,14 @@ import tacos.Ingredient;
       private String name;
       private List<Ingredient> ingredients = new ArrayList<>();
 
+      public TacoView() {
+      }
+
       public TacoView(Long id, String name) {
           this.id = id;
           this.name = name;
       }
-      
+
       public void addIngredient(Ingredient ingredient) {
           this.ingredients.add(ingredient);
       }
