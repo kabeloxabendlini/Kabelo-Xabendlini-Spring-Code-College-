@@ -43,7 +43,7 @@ export class CartComponent implements OnInit {
     });
 
     this.httpClient.post(
-        'http://localhost:8080/api/orders',
+        'http://localhost:8081/api/orders',
         this.model, {
             headers: new HttpHeaders().set('Content-type', 'application/json')
                     .set('Accept', 'application/json'),
