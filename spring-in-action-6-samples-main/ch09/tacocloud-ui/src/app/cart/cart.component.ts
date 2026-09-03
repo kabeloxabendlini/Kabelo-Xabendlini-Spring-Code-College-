@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { CartService } from './cart-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'taco-cart',
@@ -19,10 +20,16 @@ export class CartComponent implements OnInit {
     ccNumber: '',
     ccExpiration: '',
     ccCVV: '',
-    tacos: []
+    tacos: [] as any[]
   };
 
-  constructor(private cart: CartService, private httpClient: HttpClient) {
+  submitting = false;
+
+  constructor(
+    private cart: CartService,
+    private httpClient: HttpClient,
+    private router: Router
+  ) {
     this.cart = cart;
   }
 
@@ -37,7 +44,9 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.model.tacos = this.cart.getItemsInCart();
+    if (this.submitting) return;
+    this.submitting = true;
+
     this.cart.getItemsInCart().forEach(cartItem => {
       this.model.tacos.push(cartItem.taco);
     });
@@ -47,9 +56,15 @@ export class CartComponent implements OnInit {
         this.model, {
             headers: new HttpHeaders().set('Content-type', 'application/json')
                     .set('Accept', 'application/json'),
-        }).subscribe(r => this.cart.emptyCart());
-
-    // TODO: Do something after this...navigate to a thank you page or something
+        }).subscribe(
+          r => {
+            this.cart.emptyCart();
+            this.router.navigate(['/']);
+          },
+          err => {
+            this.submitting = false;
+          }
+        );
   }
 
 }
