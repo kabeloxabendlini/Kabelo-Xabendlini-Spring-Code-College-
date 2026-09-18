@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:16'
+    environment:
+      - 'POSTGRES_DB=tacodb'
+      - 'POSTGRES_USER=tacouser'
+      - 'POSTGRES_PASSWORD=tacopass'
+    ports:
+      - '5432'

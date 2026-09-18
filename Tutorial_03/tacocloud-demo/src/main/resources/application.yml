@@ -1,0 +1,6 @@
+server:
+  port: 8081   # 8080 is often taken by other local services (e.g. Apache, other apps)
+
+spring:
+  thymeleaf:
+    cache: false   # disable template caching so page edits show up on refresh without restarting

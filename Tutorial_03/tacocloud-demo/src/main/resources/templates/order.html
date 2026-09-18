@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Your Order</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Order Details</h1>
+
+    <!-- th:object binds this whole form to the "order" model attribute -->
+    <form method="POST" th:action="@{/order}" th:object="${order}">
+
+        <label for="name">Name: </label>
+        <input type="text" th:field="*{name}" id="name" />
+        <!-- shows the @NotBlank message only if that field has an error -->
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <br/>
+
+        <label for="street">Street: </label>
+        <input type="text" th:field="*{street}" id="street" />
+        <span class="error" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
+        <br/>
+
+        <label for="city">City: </label>
+        <input type="text" th:field="*{city}" id="city" />
+        <span class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+        <br/>
+
+        <label for="zip">Zip code: </label>
+        <input type="text" th:field="*{zip}" id="zip" />
+        <span class="error" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span>
+        <br/>
+
+        <button type="submit">Submit Order</button>
+    </form>
+</body>
+</html>

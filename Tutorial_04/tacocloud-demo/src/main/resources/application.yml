@@ -1,0 +1,12 @@
+server:
+  port: 8081   # 8080 is often taken by other local services (e.g. Apache, other apps)
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update   # auto-creates the taco table from the @Entity class
+    show-sql: true
+
+# Notice there's no spring.datasource.* here at all.
+# spring-boot-docker-compose reads compose.yaml, starts the postgres
+# container, and wires up the JDBC URL/username/password automatically.
