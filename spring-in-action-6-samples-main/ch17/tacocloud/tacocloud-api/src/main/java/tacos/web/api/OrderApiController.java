@@ -23,7 +23,7 @@ import tacos.messaging.OrderMessagingService;
 @RestController
 @RequestMapping(path="/api/orders",
                 produces="application/json")
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="http://localhost:8081")
 public class OrderApiController {
 
   private OrderRepository repo;

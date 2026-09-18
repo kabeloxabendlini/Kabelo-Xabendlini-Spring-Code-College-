@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Injectable } from '@angular/core';
 import { CartService } from './cart-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
     ccNumber: '',
     ccExpiration: '',
     ccCVV: '',
-    tacos: []
+    tacos: [] as any[]
   };
 
   constructor(private cart: CartService, private httpClient: HttpClient) {
@@ -43,13 +44,18 @@ export class CartComponent implements OnInit {
     });
 
     this.httpClient.post(
-        'http://localhost:8080/api/orders',
-        this.model, {
-            headers: new HttpHeaders().set('Content-type', 'application/json')
-                    .set('Accept', 'application/json'),
-        }).subscribe(r => this.cart.emptyCart());
+      'http://localhost:8082/api/orders',
+      this.model,
+      {
+        headers: new HttpHeaders()
+          .set('Content-type', 'application/json')
+          .set('Accept', 'application/json'),
+      }
+    ).subscribe(r => this.cart.emptyCart());
 
     // TODO: Do something after this...navigate to a thank you page or something
   }
 
 }
+
+

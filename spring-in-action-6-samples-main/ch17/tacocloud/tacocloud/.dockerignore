@@ -1,0 +1,6 @@
+target/*
+!target/tacocloud-0.0.17-SNAPSHOT.jar
+.git
+.mvn
+*.log
+*.filters

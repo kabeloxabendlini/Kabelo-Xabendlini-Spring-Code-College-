@@ -23,7 +23,7 @@ import tacos.data.IngredientRepository;
 
 @RestController
 @RequestMapping(path="/api/ingredients", produces="application/json")
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="http://localhost:8081")
 public class IngredientController {
 
   private IngredientRepository repo;
@@ -57,7 +57,7 @@ public class IngredientController {
         .flatMap(repo::save)
         .map(i -> {
           HttpHeaders headers = new HttpHeaders();
-          headers.setLocation(URI.create("http://localhost:8080/ingredients/" + i.getId()));
+          headers.setLocation(URI.create("http://localhost:8081/api/ingredients/" + i.getId()));
           return new ResponseEntity<Ingredient>(i, headers, HttpStatus.CREATED);
         });
   }
