@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tutorial 3 - Spring Boot 3 Web App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taco Cloud | Tutorial 3</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <h1>Welcome to the Taco Order Demo</h1>
-    <p>This page is served by a <code>@Controller</code> method returning
-       the view name <code>"home"</code>.</p>
-    <a th:href="@{/order}">Place an order &raquo;</a>
+    <main class="hero">
+        <span class="hero-emoji">🌮</span>
+        <h1>Welcome to the Taco Order Demo</h1>
+        <p class="hero-description">
+            This page is served by a <code>@Controller</code> method returning
+            the view name <code>"home"</code>.
+        </p>
+        <a class="cta-button" th:href="@{/order}">Place an order &raquo;</a>
+    </main>
 </body>
 </html>

@@ -5,30 +5,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * Handles the customer order form.
+ */
 @Controller
 public class OrderController {
 
-    // GET: show the empty form.
-    // @ModelAttribute here means "put a fresh Order object in the model
-    // under the name 'order'" so Thymeleaf's th:object can bind to it.
+    /**
+     * Displays a new, empty order form.
+     *
+     * @param model the Spring MVC model
+     * @return the Thymeleaf order page
+     */
     @GetMapping("/order")
-    public String orderForm(Model model) {
+    public String showOrderForm(Model model) {
+        // Create a new Order object for Thymeleaf to bind to.
         model.addAttribute("order", new Order());
         return "order";
     }
 
-    // POST: handle the submitted form.
-    // @Valid triggers the constraints declared on the Order class (@NotBlank, @Pattern).
-    // Errors must come immediately after the @Valid parameter — Spring populates
-    // it with any validation failures instead of throwing an exception.
+    /**
+     * Processes the submitted order form.
+     *
+     * @param order the submitted order information
+     * @param errors validation errors, if any
+     * @return the order form again when validation fails,
+     *         otherwise the confirmation page
+     */
     @PostMapping("/order")
     public String processOrder(@Valid Order order, Errors errors) {
+        // If validation fails, return to the form so that
+        // Thymeleaf can display the validation messages.
         if (errors.hasErrors()) {
-            return "order";   // re-show the form with error messages
+            return "order";
         }
+
+        // Validation succeeded.
         return "orderConfirmation";
     }
 }

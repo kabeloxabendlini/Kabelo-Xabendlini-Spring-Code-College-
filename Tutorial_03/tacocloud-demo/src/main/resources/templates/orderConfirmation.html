@@ -1,13 +1,94 @@
+```html
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Order Confirmed</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Confirmed | Taco Cloud</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
 </head>
+
 <body>
-    <h1>Thank you for your order!</h1>
-    <p>Your taco order has been placed successfully.</p>
-    <a th:href="@{/}">Back to home</a>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+    <header class="site-header">
+
+        <div class="brand">
+            <span class="brand-icon">🌮</span>
+            <span class="brand-name">Taco Cloud</span>
+        </div>
+
+        <span class="header-label">
+            Confirmation
+        </span>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+    <main class="page-container">
+
+        <section class="confirmation-card">
+
+            <!-- Success icon -->
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <!-- Confirmation message -->
+            <h1>
+                Order Confirmed!
+            </h1>
+
+            <p class="confirmation-message">
+                Thank you for ordering from Taco Cloud.
+            </p>
+
+            <p class="confirmation-details">
+                Your taco order has been successfully placed.
+                We'll get your delicious tacos ready for delivery.
+            </p>
+
+
+            <!-- Decorative divider -->
+            <div class="confirmation-divider"></div>
+
+
+            <!-- Return button -->
+            <a th:href="@{/}"
+               class="primary-button confirmation-button">
+
+                ← Back to Taco Cloud
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+    <footer class="site-footer">
+
+        <p>
+            🌮 Taco Cloud &mdash; Fresh tacos, delivered.
+        </p>
+
+    </footer>
+
 </body>
 </html>
+```

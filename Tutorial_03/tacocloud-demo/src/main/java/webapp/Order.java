@@ -1,33 +1,58 @@
 package webapp;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-// Spring Boot 3 uses the "jakarta" namespace (not "javax") for these annotations.
 public class Order {
 
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Full name is required.")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters.")
     private String name;
 
-    @NotBlank(message = "Street is required")
+    @NotBlank(message = "Street address is required.")
     private String street;
 
-    @NotBlank(message = "City is required")
+    @NotBlank(message = "City is required.")
     private String city;
 
-    @NotBlank(message = "Zip code is required")
-    @Pattern(regexp = "^\\d{4,10}$", message = "Invalid zip code")
+    @NotBlank(message = "ZIP / Postal code is required.")
+    @Size(min = 4, max = 10, message = "Please enter a valid postal code.")
     private String zip;
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    // Default constructor required by Spring/Thymeleaf for binding
+    public Order() {
+    }
 
-    public String getStreet() { return street; }
-    public void setStreet(String street) { this.street = street; }
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getZip() { return zip; }
-    public void setZip(String zip) { this.zip = zip; }
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
 }

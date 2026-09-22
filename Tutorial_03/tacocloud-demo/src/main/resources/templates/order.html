@@ -1,38 +1,220 @@
+```html
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Place Your Order</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Place Your Order | Taco Cloud</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
 </head>
+
 <body>
-    <h1>Order Details</h1>
 
-    <!-- th:object binds this whole form to the "order" model attribute -->
-    <form method="POST" th:action="@{/order}" th:object="${order}">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+    <header class="site-header">
 
-        <label for="name">Name: </label>
-        <input type="text" th:field="*{name}" id="name" />
-        <!-- shows the @NotBlank message only if that field has an error -->
-        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-        <br/>
+        <div class="brand">
+            <span class="brand-icon">🌮</span>
+            <span class="brand-name">Taco Cloud</span>
+        </div>
 
-        <label for="street">Street: </label>
-        <input type="text" th:field="*{street}" id="street" />
-        <span class="error" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
-        <br/>
+        <span class="header-label">
+            Place Order
+        </span>
 
-        <label for="city">City: </label>
-        <input type="text" th:field="*{city}" id="city" />
-        <span class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
-        <br/>
+    </header>
 
-        <label for="zip">Zip code: </label>
-        <input type="text" th:field="*{zip}" id="zip" />
-        <span class="error" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span>
-        <br/>
 
-        <button type="submit">Submit Order</button>
-    </form>
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+    <main class="page-container">
+
+        <section class="order-card">
+
+            <!-- Page heading -->
+            <div class="order-header">
+
+                <span class="order-icon">🛒</span>
+
+                <div>
+                    <h1>Complete Your Order</h1>
+
+                    <p>
+                        Tell us where you'd like your tacos delivered.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ORDER FORM
+                 ================================================= -->
+            <form method="POST"
+                  th:action="@{/order}"
+                  th:object="${order}"
+                  class="order-form">
+
+                <div class="form-section">
+
+                    <h2>Delivery Information</h2>
+
+                    <p class="section-description">
+                        Please enter your delivery details below.
+                    </p>
+
+
+                    <!-- Full name -->
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            th:field="*{name}"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            th:classappend="${#fields.hasErrors('name')} ? ' input-error' : ''"
+                        />
+
+                        <span
+                            class="error"
+                            th:if="${#fields.hasErrors('name')}"
+                            th:errors="*{name}">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Street -->
+                    <div class="form-group">
+
+                        <label for="street">
+                            Street Address
+                        </label>
+
+                        <input
+                            type="text"
+                            id="street"
+                            th:field="*{street}"
+                            placeholder="Enter your street address"
+                            autocomplete="street-address"
+                            th:classappend="${#fields.hasErrors('street')} ? ' input-error' : ''"
+                        />
+
+                        <span
+                            class="error"
+                            th:if="${#fields.hasErrors('street')}"
+                            th:errors="*{street}">
+                        </span>
+
+                    </div>
+
+
+                    <!-- City -->
+                    <div class="form-group">
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            th:field="*{city}"
+                            placeholder="Enter your city"
+                            autocomplete="address-level2"
+                            th:classappend="${#fields.hasErrors('city')} ? ' input-error' : ''"
+                        />
+
+                        <span
+                            class="error"
+                            th:if="${#fields.hasErrors('city')}"
+                            th:errors="*{city}">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Postal code -->
+                    <div class="form-group">
+
+                        <label for="zip">
+                            ZIP / Postal Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="zip"
+                            th:field="*{zip}"
+                            placeholder="Enter your postal code"
+                            autocomplete="postal-code"
+                            inputmode="numeric"
+                            th:classappend="${#fields.hasErrors('zip')} ? ' input-error' : ''"
+                        />
+
+                        <span
+                            class="error"
+                            th:if="${#fields.hasErrors('zip')}"
+                            th:errors="*{zip}">
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BUTTONS
+                     ================================================= -->
+                <div class="form-actions">
+
+                    <a th:href="@{/}"
+                       class="secondary-button">
+                        ← Back
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-button">
+
+                        Place Order
+                        <span>→</span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+    <footer class="site-footer">
+
+        <p>
+            🌮 Taco Cloud &mdash; Fresh tacos, delivered.
+        </p>
+
+    </footer>
+
 </body>
 </html>
+```
