@@ -7,14 +7,21 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
+
+    <!-- ========================================================= 
+         MAIN LANDING HERO
+         ========================================================= -->
     <main class="hero">
         <span class="hero-emoji">🌮</span>
         <h1>Welcome to the Taco Order Demo</h1>
+        
         <p class="hero-description">
             This page is served by a <code>@Controller</code> method returning
             the view name <code>"home"</code>.
         </p>
+        
         <a class="cta-button" th:href="@{/order}">Place an order &raquo;</a>
     </main>
+
 </body>
 </html>
