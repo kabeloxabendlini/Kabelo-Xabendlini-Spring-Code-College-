@@ -37,7 +37,8 @@
             <!-- ================================================= 
                  TACO BUILDER FORM
                  ================================================= -->
-            <form method="POST" th:action="@{/design}" class="order-form">
+            <!-- Form tracks validation binding via th:object="${taco}" -->
+            <form method="POST" th:action="@{/design}" th:object="${taco}" class="order-form">
                 
                 <!-- ================================================= 
                      TACO NAME 
@@ -47,7 +48,8 @@
                     <p class="section-description">Give your creation a name.</p>
                     <div class="form-group">
                         <label for="tacoName">Taco Name</label>
-                        <input type="text" id="tacoName" name="tacoName" placeholder="e.g. The Kabelo Special" autocomplete="off" />
+                        <input type="text" id="tacoName" th:field="*{tacoName}" placeholder="e.g. The Kabelo Special" autocomplete="off" th:classappend="${#fields.hasErrors('tacoName')} ? ' input-error' : ''" />
+                        <span class="error" th:if="${#fields.hasErrors('tacoName')}" th:errors="*{tacoName}"></span>
                     </div>
                 </div>
 
@@ -59,27 +61,28 @@
                     <p class="section-description">Select the meat or protein you'd like in your taco.</p>
                     <div class="ingredient-grid">
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="CARN">
+                            <input type="checkbox" th:field="*{ingredients}" value="CARN">
                             <span class="ingredient-content">
                                 <strong>Ground Beef</strong>
                                 <small>CARN</small>
                             </span>
                         </label>
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="CHKN">
+                            <input type="checkbox" th:field="*{ingredients}" value="CHKN">
                             <span class="ingredient-content">
                                 <strong>Chicken</strong>
                                 <small>CHKN</small>
                             </span>
                         </label>
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="PORK">
+                            <input type="checkbox" th:field="*{ingredients}" value="PORK">
                             <span class="ingredient-content">
                                 <strong>Pork</strong>
                                 <small>PORK</small>
                             </span>
                         </label>
                     </div>
+                    <span class="error" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></span>
                 </div>
 
                 <!-- ================================================= 
@@ -90,14 +93,14 @@
                     <p class="section-description">Pick a cheese to make your taco extra delicious.</p>
                     <div class="ingredient-grid">
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="CHED">
+                            <input type="checkbox" th:field="*{ingredients}" value="CHED">
                             <span class="ingredient-content">
                                 <strong>Cheddar</strong>
                                 <small>CHED</small>
                             </span>
                         </label>
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="JACK">
+                            <input type="checkbox" th:field="*{ingredients}" value="JACK">
                             <span class="ingredient-content">
                                 <strong>Monterey Jack</strong>
                                 <small>JACK</small>
@@ -114,21 +117,21 @@
                     <p class="section-description">Add some fresh vegetables to your taco.</p>
                     <div class="ingredient-grid">
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="LETC">
+                            <input type="checkbox" th:field="*{ingredients}" value="LETC">
                             <span class="ingredient-content">
                                 <strong>Lettuce</strong>
                                 <small>LETC</small>
                             </span>
                         </label>
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="TMTO">
+                            <input type="checkbox" th:field="*{ingredients}" value="TMTO">
                             <span class="ingredient-content">
                                 <strong>Tomato</strong>
                                 <small>TMTO</small>
                             </span>
                         </label>
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="ONIN">
+                            <input type="checkbox" th:field="*{ingredients}" value="ONIN">
                             <span class="ingredient-content">
                                 <strong>Onion</strong>
                                 <small>ONIN</small>
@@ -145,7 +148,7 @@
                     <p class="section-description">Choose a sauce to give your taco some extra flavor.</p>
                     <div class="ingredient-grid">
                         <label class="ingredient-option">
-                            <input type="checkbox" name="ingredients" value="SLSA">
+                            <input type="checkbox" th:field="*{ingredients}" value="SLSA">
                             <span class="ingredient-content">
                                 <strong>Salsa</strong>
                                 <small>SLSA</small>
